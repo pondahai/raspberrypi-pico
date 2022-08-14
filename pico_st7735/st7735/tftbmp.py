@@ -1,13 +1,13 @@
 from ST7735 import TFT,TFTColor
 from machine import SPI,Pin
-spi = SPI(1, baudrate=20000000, polarity=0, phase=0,
-          sck=Pin(10), mosi=Pin(11), miso=None)
-tft=TFT(spi,16,17,18)
-tft.initr()
+spi = SPI(0, baudrate=20000000, polarity=0, phase=0,
+          sck=Pin(18), mosi=Pin(19), miso=None)
+tft=TFT(spi,20,21,17) # DC=Pin(20), RST=Pin(21), CS=Pin(17),
+tft.initb2()
 tft.rgb(True)
 tft.fill(TFT.BLACK)
 
-f=open('logo.bmp', 'rb')
+f=open('test128x160.bmp', 'rb')
 if f.read(2) == b'BM':  #header
     dummy = f.read(8) #file size(4), creator bytes(4)
     offset = int.from_bytes(f.read(4), 'little')
